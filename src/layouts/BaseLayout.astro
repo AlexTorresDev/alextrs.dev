@@ -12,70 +12,81 @@ const {
 	is404 = false
 } = Astro.props
 
-const now = new Date();
-const isChristmas = (
+const now = new Date()
+const isChristmas =
 	(now.getMonth() === 11 && now.getDate() <= 31) ||
 	(now.getMonth() === 0 && now.getDate() <= 7)
-)
 ---
 
 <!doctype html>
 <html lang="es" transition:animate="none">
-<head>
-	<BaseHead title={title} description={description} image={image} />
-</head>
-<body>
-<div
-	class:list={[
-		'flex flex-col bg-container bg-neutral-50! dark:bg-neutral-900!',
-		{ 'h-screen': is404 }
-	]}
->
-	<Header title={SITE_TITLE} />
-	<div class:list={['md:flex md:justify-center', { 'm-auto': is404 }]}>
-		<main class="p-6 pt-10 max-w-225">
-			<slot />
-		</main>
-	</div>
-	<Footer />
-</div>
+	<head>
+		<BaseHead title={title} description={description} image={image} />
+	</head>
+	<body>
+		<div
+			class:list={[
+				'flex flex-col bg-container bg-neutral-50! dark:bg-neutral-900!',
+				{ 'h-screen': is404 }
+			]}
+		>
+			<Header title={SITE_TITLE} />
+			<div class:list={['md:flex md:justify-center', { 'm-auto': is404 }]}>
+				<main class="p-6 pt-10 max-w-225">
+					<slot />
+				</main>
+			</div>
+			<Footer />
+		</div>
 
-{isChristmas && (
-	<div id="snow-root" aria-hidden="true"></div>
-	<script src="https://unpkg.com/@le-pepe/snow-effect"></script>
-	<script>
-		const createSnow = (color) => {
-			const root = document.getElementById('snow-root');
-			if (!root) return;
-			let snow = root.querySelector('snow-effect');
-			if (!snow) {
-				snow = document.createElement('snow-effect');
-				snow.setAttribute('flakes', '200');
-				snow.setAttribute('speed', '1');
-				root.appendChild(snow);
+		<div id="snow-root" aria-hidden="true"></div>
+		<script src="https://unpkg.com/@le-pepe/snow-effect"></script>
+		<script>
+			const now = new Date()
+			const month = now.getMonth()
+			const day = now.getDate()
+
+			const isChristmas = month === 11 || (month === 0 && day <= 7)
+
+			if (isChristmas) {
+				const createSnow = (color) => {
+					const root = document.getElementById('snow-root')
+					if (!root) return
+					let snow = root.querySelector('snow-effect')
+					if (!snow) {
+						snow = document.createElement('snow-effect')
+						snow.setAttribute('flakes', '200')
+						snow.setAttribute('speed', '1')
+						root.appendChild(snow)
+					}
+					snow.setAttribute('color', color)
+				}
+
+				const resolveTheme = () => {
+					const stored = localStorage.getItem('color-theme')
+					if (stored) return stored === 'dark' ? 'dark' : 'light'
+					if (document.documentElement.classList.contains('dark')) return 'dark'
+					return window.matchMedia &&
+						window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light'
+				}
+
+				const update = () => {
+					const theme = resolveTheme()
+					const color = theme === 'dark' ? '#FFFFFF' : '#87CEEB'
+					createSnow(color)
+				}
+
+				update()
+
+				const observer = new MutationObserver(update)
+				observer.observe(document.documentElement, {
+					attributes: true,
+					attributeFilter: ['class']
+				})
+				window.addEventListener('storage', update)
 			}
-			snow.setAttribute('color', color);
-		};
-
-		const resolveTheme = () => {
-			const stored = localStorage.getItem('color-theme');
-			if (stored) return stored === 'dark' ? 'dark' : 'light';
-			if (document.documentElement.classList.contains('dark')) return 'dark';
-			return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-		};
-
-		const update = () => {
-			const theme = resolveTheme();
-			const color = theme === 'dark' ? '#FFFFFF' : '#87CEEB';
-			createSnow(color);
-		};
-
-		update();
-
-		const observer = new MutationObserver(update);
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-		window.addEventListener('storage', update);
 		</script>
-)}
-</body>
+	</body>
 </html>
