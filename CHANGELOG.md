@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/AlexTorresDev/alextorresdev.github.io/compare/v1.3.0...v1.3.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* streamline Christmas snow effect integration and improve code readability ([3443b5d](https://github.com/AlexTorresDev/alextorresdev.github.io/commit/3443b5dbc2c38838ef8af492ea76f3e2fc73c32e))
+
 # [1.3.0](https://github.com/AlexTorresDev/alextorresdev.github.io/compare/v1.2.7...v1.3.0) (2025-12-24)
 
 
