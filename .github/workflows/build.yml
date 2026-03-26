@@ -22,10 +22,10 @@ concurrency:
 jobs:
   build:
     name: 📦 Build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v6
       - name: Install, build, and upload artifact
-        uses: withastro/action@v3.0.2
+        uses: withastro/action@v6
         

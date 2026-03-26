@@ -21,18 +21,18 @@ jobs:
   release:
     name: 🚀 Deploy
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Download artifact
-        uses: dawidd6/action-download-artifact@v8
+        uses: dawidd6/action-download-artifact@v19
         with:
           workflow: build.yml
           github_token: ${{ secrets.PAT }}
@@ -40,7 +40,7 @@ jobs:
           path: artifact
       - name: Semantic Release
         id: semantic
-        uses: cycjimmy/semantic-release-action@v4.1.1
+        uses: cycjimmy/semantic-release-action@v6
         with:
           extra_plugins: |
             @semantic-release/changelog
@@ -52,11 +52,11 @@ jobs:
           GIT_COMMITTER_NAME: 'GitHub Actions'
           GIT_COMMITTER_EMAIL: 'action@github.com'
       - name: Upload artifact
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v7
         with:
           name: github-pages
           path: artifact
       - name: Deploy to GitHub Pages
-        if: ${{ steps.semantic.outputs.new_release_published }} == 'true' || ${{ github.event.inputs.force }} == 'true'
+        if: ${{ steps.semantic.outputs.new_release_published == 'true' || github.event.inputs.force == 'true' }}
         id: deployment
-        uses: actions/deploy-pages@v4.0.5
+        uses: actions/deploy-pages@v5
