@@ -31,7 +31,7 @@ const projects: Project[] = [
     image: '/images/projects/cet.webp',
     name: 'Custom Electron Titlebar',
     description: 'Librería para personalizar la barra de titulo de una aplicación electron al estilo VS Code, que es 100% personalizable.',
-    status: 'Cancelado',
+    status: 'En desarrollo',
     repo: 'https://github.com/AlexTorresDev/custom-electron-titlebar',
     tags: ['Electron', 'NodeJS'],
     languages: ['TypeScript']

@@ -2,9 +2,9 @@
 	"name": "alextorresdev.github.io",
 	"description": "https://alextorresdev.github.io website",
 	"type": "module",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"private": true,
-	"packageManager": "pnpm@10.26.2",
+	"packageManager": "pnpm@10.33.0",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -24,12 +24,12 @@
 	},
 	"homepage": "https://github.com/AlexTorresDev/alextorresdev.github.io#readme",
 	"dependencies": {
-		"@astrojs/mdx": "4.3.13",
-		"@astrojs/rss": "4.0.14",
-		"@astrojs/sitemap": "3.6.0",
-		"@tailwindcss/vite": "4.1.18",
-		"astro": "5.16.6",
-		"tailwindcss": "4.1.18",
+		"@astrojs/mdx": "5.0.3",
+		"@astrojs/rss": "4.0.18",
+		"@astrojs/sitemap": "3.7.2",
+		"@tailwindcss/vite": "4.2.2",
+		"astro": "6.1.0",
+		"tailwindcss": "4.2.2",
 		"vite-plugin-pwa": "1.2.0"
 	},
 	"devDependencies": {
