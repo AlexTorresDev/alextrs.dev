@@ -1,6 +1,6 @@
 {
-	"name": "alextorresdev.github.io",
-	"description": "https://alextorresdev.github.io website",
+	"name": "alextrs.dev",
+	"description": "https://alextrs.dev website",
 	"type": "module",
 	"version": "1.0.2",
 	"private": true,
@@ -14,15 +14,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/AlexTorresDev/alextorresdev.github.io.git"
+		"url": "git+https://github.com/AlexTorresDev/alextrs.dev.git"
 	},
 	"keywords": [],
 	"author": "Alex Torres",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/AlexTorresDev/alextorresdev.github.io/issues"
+		"url": "https://github.com/AlexTorresDev/alextrs.dev/issues"
 	},
-	"homepage": "https://github.com/AlexTorresDev/alextorresdev.github.io#readme",
+	"homepage": "https://github.com/AlexTorresDev/alextrs.dev#readme",
 	"dependencies": {
 		"@astrojs/mdx": "5.0.3",
 		"@astrojs/rss": "4.0.18",
