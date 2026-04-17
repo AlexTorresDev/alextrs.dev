@@ -11,11 +11,6 @@ const {
 	description = SITE_DESCRIPTION,
 	is404 = false
 } = Astro.props
-
-const now = new Date()
-const isChristmas =
-	(now.getMonth() === 11 && now.getDate() <= 31) ||
-	(now.getMonth() === 0 && now.getDate() <= 7)
 ---
 
 <!doctype html>
@@ -49,7 +44,7 @@ const isChristmas =
 			const isChristmas = month === 11 || (month === 0 && day <= 7)
 
 			if (isChristmas) {
-				const createSnow = (color) => {
+				const createSnow = (color: string) => {
 					const root = document.getElementById('snow-root')
 					if (!root) return
 					let snow = root.querySelector('snow-effect')
