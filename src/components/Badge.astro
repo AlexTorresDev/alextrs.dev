@@ -1,8 +1,14 @@
 ---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
 type Props = {
 	text: string
 }
 const { text }: Props = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const label = t(text as Parameters<typeof t>[0]) || text
 ---
 
 <span
@@ -10,15 +16,15 @@ const { text }: Props = Astro.props
 		'text-xs whitespace-nowrap font-medium px-2.5 py-0.5 rounded',
 		{
 			'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300':
-				text.toLowerCase() === 'en desarrollo',
+				text === 'development',
 			'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300':
-				text.toLowerCase() === 'en pausa',
+				text === 'paused',
 			'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300':
-				text.toLowerCase() === 'cancelado',
+				text === 'cancelled',
 			'bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-300':
-				text.toLowerCase() === 'próximamente'
+				text === 'coming-soon'
 		}
 	]}
 >
-	{text}
+	{label}
 </span>

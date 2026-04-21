@@ -12,13 +12,13 @@ const { title, img, desc, url, badge, tags, target = '_blank' } = Astro.props
 		'flex flex-col items-center relative bg-white border border-gray-200 rounded-lg shadow overflow-hidden md:flex-row before:absolute before:bottom-0 before:end-0 before:w-24 before:h-24 before:rounded-full before:blur-[3.25rem] hover:bg-neutral-100 dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700',
 		{
 			'before:bg-green-900/30 dark:before:bg-green-500/30':
-				badge.toLowerCase() === 'en desarrollo',
+				badge === 'development',
 			'before:bg-blue-900/30 dark:before:bg-blue-500/30':
-				badge.toLowerCase() === 'en pausa',
+				badge === 'paused',
 			'before:bg-red-900/30 dark:before:bg-red-500/30':
-				badge.toLowerCase() === 'cancelado',
+				badge === 'cancelled',
 			'before:bg-neutral-900/30 dark:before:bg-neutral-500/30':
-				badge.toLowerCase() === 'próximamente'
+				badge === 'coming-soon'
 		}
 	]}
 >

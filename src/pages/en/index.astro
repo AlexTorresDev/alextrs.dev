@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Card from '@/components/Card.astro'
+import Social from '@/components/Social.astro'
+
+import projects from '@/data/projects'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+
+---
+
+<BaseLayout>
+	<div class="pb-12 mt-5">
+		<div class="mt-12">
+			<span class="block mb-1 text-xl py-1 dark:text-white/70">Hi 👋</span>
+			<h1
+				class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-neutral-800 md:text-5xl lg:text-6xl dark:text-white"
+			>
+				I'm Alex
+			</h1>
+			<span
+				class="block mb-1 text-3xl py-3 font-bold text-emerald-600 contrast-200"
+			>
+				Developer and Telematics Engineer
+			</span>
+		</div>
+
+		<p
+			class="py-2 text-lg font-normal text-neutral-600 lg:text-xl dark:text-neutral-400"
+		>
+			I have over six years of experience in mobile and web application
+			development. I took on the challenge of transitioning from JSF to Angular,
+			React, and Spring Boot for new projects. I also developed a mobile app for
+			an American company to manage its fleet and track its vehicles’ locations.
+			I built a mobile and web platform for the Sopó City Hall, and I have
+			contributed to projects for well-known banks.
+		</p>
+		<div class="mt-8">
+			<Social />
+		</div>
+	</div>
+
+	<div class="mb-12">
+		<h2 class="text-3xl font-bold dark:text-white mb-5 mt-28">🎊 Projects</h2>
+
+		<div class="flex flex-col gap-8">
+			{
+				projects.map((project) => (
+					<Card
+						title={project.name}
+						img={project.image}
+						desc={project.description[lang]}
+						url={project.repo}
+						badge={project.status}
+						tags={[...project.tags, ...project.languages]}
+					/>
+				))
+			}
+		</div>
+	</div>
+</BaseLayout>

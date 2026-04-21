@@ -1,0 +1,44 @@
+---
+import { getLangFromUrl } from '@/i18n/utils'
+import { languages } from '@/i18n/ui'
+
+const currentLang = getLangFromUrl(Astro.url)
+const pathname = Astro.url.pathname
+const route = pathname.split('/').filter(Boolean).slice(1).join('/')
+
+const getHref = (lang: keyof typeof languages) =>
+	route ? `/${lang}/${route}` : `/${lang}/`
+---
+
+<nav aria-label="Cambiar idioma" class="hidden md:inline-flex flex-none">
+	<ul
+		class="inline-flex items-center gap-1 rounded-full border border-neutral-200 bg-white/90 px-1 py-1 shadow-sm backdrop-blur dark:border-neutral-700 dark:bg-neutral-800/90 sm:gap-1 sm:px-1 sm:py-1"
+	>
+		{
+			Object.entries(languages).map(([lang, label]) => {
+				const isActive = lang === currentLang
+
+				return (
+					<li>
+						<a
+							href={getHref(lang as keyof typeof languages)}
+							aria-current={isActive ? 'page' : undefined}
+							class:list={[
+								'inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors duration-200 sm:px-3 sm:py-1.5 sm:text-xs sm:tracking-[0.18em]',
+								{
+									'bg-emerald-600 text-white shadow-sm': isActive,
+									'text-neutral-600 hover:bg-neutral-100 hover:text-emerald-600 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white':
+										!isActive
+								}
+							]}
+							aria-label={label}
+						>
+							<span class="sm:hidden leading-none">{lang.toUpperCase()}</span>
+							<span class="hidden sm:inline">{label}</span>
+						</a>
+					</li>
+				)
+			})
+		}
+	</ul>
+</nav>
