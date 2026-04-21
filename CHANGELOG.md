@@ -1,5 +1,21 @@
 # Changelog
 
+# [1.4.0](https://github.com/AlexTorresDev/alextrs.dev/compare/v1.3.1...v1.4.0) (2026-04-21)
+
+
+### Bug Fixes
+
+* add caching configuration to build workflow for improved performance ([99c21da](https://github.com/AlexTorresDev/alextrs.dev/commit/99c21da99f84d8e5ee05686ce5e3bf86342f73b9))
+* update project name and URLs in package.json to reflect new branding ([38ae750](https://github.com/AlexTorresDev/alextrs.dev/commit/38ae7509e7ec6741f3518c4fdbdf00af233ed8c6))
+* update workflow configurations to use latest versions of actions and Ubuntu ([cf0e1f5](https://github.com/AlexTorresDev/alextrs.dev/commit/cf0e1f5f84b36f85290286e58e9787a3746244be))
+
+
+### Features
+
+* add canonical link to BaseHead component for improved SEO ([a9c5f11](https://github.com/AlexTorresDev/alextrs.dev/commit/a9c5f1137b9e004b69976828e6400e2daf21f76b))
+* add English and Spanish pages for 404, index, and privacy policy; update routing and i18n configuration ([bd433f7](https://github.com/AlexTorresDev/alextrs.dev/commit/bd433f786c1e1311674a87ad1c64e4ffbb61823b))
+* update project structure and localization support with new privacy policy and i18n files ([5a9cf82](https://github.com/AlexTorresDev/alextrs.dev/commit/5a9cf825e75adec23297510f7b49824e0477852f))
+
 ## [1.3.1](https://github.com/AlexTorresDev/alextorresdev.github.io/compare/v1.3.0...v1.3.1) (2026-03-02)
 
 
