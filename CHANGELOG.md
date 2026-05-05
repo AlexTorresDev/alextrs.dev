@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.5.0](https://github.com/AlexTorresDev/alextrs.dev/compare/v1.4.0...v1.5.0) (2026-05-05)
+
+
+### Features
+
+* update footer and header components for improved layout and accessibility ([9479b23](https://github.com/AlexTorresDev/alextrs.dev/commit/9479b23d6f30dc66130b722de7aa6794886dae11))
+
 # [1.4.0](https://github.com/AlexTorresDev/alextrs.dev/compare/v1.3.1...v1.4.0) (2026-04-21)
 
 
