@@ -1,46 +1,79 @@
 ---
+import { Briefcase, GraduationCap, Laptop, LaptopMinimal, Users } from '@lucide/astro'
+
 type Props = {
 	title: string
+	date?: string
 	subtitle: string
 	modality?: string
+	side?: 'left' | 'right'
 }
 
-const { title, subtitle, modality }: Props = Astro.props
+const { title, date, subtitle, modality, side = 'right' }: Props = Astro.props
+
+const lowerTitle = title.toLowerCase()
+const Icon = lowerTitle.includes('ingeniero') ||
+	lowerTitle.includes('tecnologo') ||
+	lowerTitle.includes('tecnólogo')
+	? GraduationCap
+	: lowerTitle.includes('desarrollador')
+		? Laptop
+		: Briefcase
+
+const lowerModality = modality ? modality.toLowerCase() : ''
+const ModalityIcon = lowerModality.includes('remoto')
+	? LaptopMinimal
+	: lowerModality.includes('hibrido') || lowerModality.includes('híbrido')
+		? Users
+		: null
+
+const MarkerIcon = ModalityIcon || Icon
 ---
 
-<li class="mb-10 ms-6">
-	<span
-		class="absolute flex items-center justify-center w-6 h-6 bg-emerald-100 rounded-full -start-3 ring-8 ring-transparent dark:bg-emerald-900"
+<li
+	class:list={[
+		'relative mb-10 md:w-1/2',
+		side === 'left'
+			? 'md:mr-auto md:pr-10'
+			: 'md:ml-auto md:pl-10'
+	]}
+>
+	<div
+		class:list={[
+			'relative flex gap-2 pl-11 md:pl-0',
+			side === 'left'
+				? 'md:justify-end md:pr-6 md:-mr-10'
+				: 'md:justify-start md:-ml-13'
+		]}
 	>
-		<svg
-			class="w-2.5 h-2.5 text-emerald-800 dark:text-emerald-400"
-			aria-hidden="true"
-			xmlns="http://www.w3.org/2000/svg"
-			fill="currentColor"
-			viewBox="0 0 20 20"
+		<time
+			class:list={[
+				'text-sm text-slate-500 dark:text-slate-400 order-2 md:order-2',
+				side === 'left' ? 'md:order-1 md:text-right md:pr-5' : 'md:order-2 md:pl-5'
+			]}
 		>
-			<path
-				d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-			></path>
-		</svg>
-	</span>
-	<h3
-		class="flex items-center mb-1 text-lg font-semibold text-neutral-800 dark:text-white"
-	>
-		{title}
-	</h3>
-	<time
-		class="block mb-2 text-sm font-normal leading-none text-neutral-400 dark:text-neutral-500"
-		>{subtitle}
-		{
-			modality && (
-				<span class="bg-emerald-100 text-emerald-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-emerald-900 dark:text-emerald-300 ms-3">
-					{modality}
-				</span>
-			)
-		}
-	</time>
-	<div class="mb-4 text-base font-normal text-neutral-500 dark:text-neutral-400">
-		<slot />
+			{date && <span class="block">{date}</span>}
+			{subtitle}
+		</time>
+		<span
+			class:list={[
+				'order-1 md:order-1 inline-flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-white border border-emerald-400/40 -ml-10.5 md:ml-0',
+				side === 'left' ? 'md:order-2 md:-mr-10' : 'md:order-1 md:-ml-10'
+			]}
+			title={modality || title}
+		>
+			<MarkerIcon class="h-3.5 w-3.5" />
+		</span>
+	</div>
+
+	<div class="mt-2 rounded-2xl bg-[linear-gradient(140deg,rgba(16,185,129,0.35),rgba(56,189,248,0.25))] ml-9 md:ml-0">
+		<div class="rounded-2xl bg-white/70 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-white/10">
+			<h3 class="mb-1 text-lg font-semibold text-neutral-800 dark:text-white">
+				{title}
+			</h3>
+			<div class="text-sm font-normal leading-relaxed text-neutral-600 dark:text-neutral-300 space-y-3">
+				<slot />
+			</div>
+		</div>
 	</div>
 </li>

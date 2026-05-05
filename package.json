@@ -2,9 +2,9 @@
 	"name": "alextrs.dev",
 	"description": "https://alextrs.dev website",
 	"type": "module",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"private": true,
-	"packageManager": "pnpm@10.33.0",
+	"packageManager": "pnpm@10.33.3",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -24,12 +24,16 @@
 	},
 	"homepage": "https://github.com/AlexTorresDev/alextrs.dev#readme",
 	"dependencies": {
-		"@astrojs/mdx": "5.0.3",
+ 		"@astrojs/preact": "^5.1.2",
+		"@astrojs/mdx": "5.0.4",
 		"@astrojs/rss": "4.0.18",
 		"@astrojs/sitemap": "3.7.2",
-		"@tailwindcss/vite": "4.2.2",
-		"astro": "6.1.6",
-		"tailwindcss": "4.2.2",
+		"@lucide/astro": "^1.14.0",
+		"preact": "^10.29.1",
+		"preact-render-to-string": "^6.6.7",
+		"@tailwindcss/vite": "4.2.4",
+		"astro": "6.2.2",
+		"tailwindcss": "4.2.4",
 		"vite-plugin-pwa": "1.2.0"
 	},
 	"devDependencies": {

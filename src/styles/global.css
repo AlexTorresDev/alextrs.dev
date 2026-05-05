@@ -1,13 +1,3 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
-
-.bg-container {
-  background: radial-gradient(#10b981, transparent 35%) no-repeat -175vw -70vh / 250vw 300vh,
-    radial-gradient(closest-side, #22b66a4b, transparent) no-repeat calc(100% + 4rem * 6) calc(3.8rem * -7) / calc(3.5rem * 12) calc(3.5rem * 19);
-}
-
-:is(.dark .bg-container) {
-  background: radial-gradient(#10b98183, transparent 35%) no-repeat -175vw -70vh / 250vw 300vh,
-    radial-gradient(closest-side, #22b66a25, transparent) no-repeat calc(100% + 4rem * 6) calc(3.8rem * -7) / calc(3.5rem * 12) calc(3.5rem * 19);
-}

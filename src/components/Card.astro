@@ -1,31 +1,48 @@
 ---
 import { Image } from 'astro:assets'
+import { Pause, Rocket, X } from '@lucide/astro'
 import Badge from '@/components/Badge.astro'
 
 const { title, img, desc, url, badge, tags, target = '_blank' } = Astro.props
+
+const statusConfig: Record<string, any> = {
+	development: {
+		icon: Rocket,
+		accent: 'text-emerald-600',
+		dot: 'bg-emerald-500',
+		glow: 'before:bg-emerald-500/30 dark:before:bg-emerald-400/30'
+	},
+	paused: {
+		icon: Pause,
+		accent: 'text-sky-600',
+		dot: 'bg-sky-500',
+		glow: 'before:bg-sky-500/30 dark:before:bg-sky-400/30'
+	},
+	cancelled: {
+		icon: X,
+		accent: 'text-rose-600',
+		dot: 'bg-rose-500',
+		glow: 'before:bg-rose-500/30 dark:before:bg-rose-400/30'
+	}
+}
+
+const status = badge && statusConfig[badge]
+const StatusIcon = status?.icon
 ---
 
 <a
 	href={url}
 	target={target}
 	class:list={[
-		'flex flex-col items-center relative bg-white border border-gray-200 rounded-lg shadow overflow-hidden md:flex-row before:absolute before:bottom-0 before:end-0 before:w-24 before:h-24 before:rounded-full before:blur-[3.25rem] hover:bg-neutral-100 dark:border-gray-700 dark:bg-neutral-800 dark:hover:bg-neutral-700',
-		{
-			'before:bg-green-900/30 dark:before:bg-green-500/30':
-				badge === 'development',
-			'before:bg-blue-900/30 dark:before:bg-blue-500/30':
-				badge === 'paused',
-			'before:bg-red-900/30 dark:before:bg-red-500/30':
-				badge === 'cancelled',
-			'before:bg-neutral-900/30 dark:before:bg-neutral-500/30':
-				badge === 'coming-soon'
-		}
+		'group flex flex-col items-center relative overflow-hidden rounded-3xl border border-slate-200/60 bg-white/60 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:flex-row dark:border-white/10 dark:bg-white/5',
+		'before:absolute before:bottom-0 before:inset-e-0 before:h-28 before:w-28 before:rounded-full before:blur-[3.5rem]',
+		status?.glow
 	]}
 >
 	{
 		img && (
 			<Image
-				class="max-w-full md:max-w-[16rem] object-cover w-full rounded-t-lg md:rounded-none md:rounded-s-lg"
+				class="max-w-full md:max-w-[18rem] object-cover w-full rounded-t-3xl md:rounded-none md:rounded-s-3xl"
 				src={img}
 				alt={title}
 				format="webp"
@@ -35,15 +52,25 @@ const { title, img, desc, url, badge, tags, target = '_blank' } = Astro.props
 		)
 	}
 
-	<div class="flex flex-col h-full justify-between p-4 w-full leading-normal">
+	{status && (
+		<span
+			class:list={[
+				'absolute top-5 right-5 inline-flex h-8 w-8 items-center justify-center rounded-full shadow-sm',
+				status.dot
+			]}
+			aria-hidden="true"
+		>
+			{StatusIcon && <StatusIcon class="h-4 w-4 text-white" />}
+		</span>
+	)}
+
+	<div class="flex flex-col h-full justify-between p-5 w-full leading-normal">
 		<div>
-			{
-				(
-					<h5 class="mb-2 text-2xl font-bold tracking-tight text-neutral-800 dark:text-white">
-						{title}
-					</h5>
-				)
-			}
+			<div class="mb-2">
+				<h5 class="text-2xl font-bold tracking-tight text-neutral-800 dark:text-white">
+					{title}
+				</h5>
+			</div>
 			{badge && <Badge text={badge} />}
 			<p class="my-3 font-normal text-neutral-700 dark:text-neutral-400">
 				{desc}
@@ -56,7 +83,7 @@ const { title, img, desc, url, badge, tags, target = '_blank' } = Astro.props
 			{
 				tags &&
 					tags.map((tag: string) => (
-						<span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded border-[2px] border-neutral-200 text-neutral-700 dark:border-neutral-600 dark:text-neutral-300">
+						<span class="text-xs font-semibold me-2 px-2.5 py-0.5 rounded-full border border-neutral-200/80 bg-white/60 text-neutral-700 shadow-sm dark:border-neutral-700 dark:bg-white/5 dark:text-neutral-300">
 							{tag}
 						</span>
 					))

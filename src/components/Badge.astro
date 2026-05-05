@@ -15,11 +15,11 @@ const label = t(text as Parameters<typeof t>[0]) || text
 	class:list={[
 		'text-xs whitespace-nowrap font-medium px-2.5 py-0.5 rounded',
 		{
-			'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300':
+			'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300':
 				text === 'development',
-			'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300':
+			'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300':
 				text === 'paused',
-			'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300':
+			'bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-300':
 				text === 'cancelled',
 			'bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-300':
 				text === 'coming-soon'

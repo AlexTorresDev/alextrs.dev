@@ -1,0 +1,173 @@
+---
+import TimeLineElement from '@/components/TimeLine.astro'
+import { skills } from '@/data/skills'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="Curriculum Vitae">
+	<section>
+		<h1 class="text-3xl font-bold dark:text-white mb-5">
+			🎉 Curriculum Vitae
+		</h1>
+
+		<div class="mt-12 mb-8">
+			<span class="text-2xl font-bold dark:text-white">Experience</span>
+		</div>
+
+		<div class="relative">
+			<span
+				class="absolute top-0 bottom-0 left-3 w-0.5 bg-[linear-gradient(180deg,rgba(16,185,129,0.2),rgba(56,189,248,0.2))] md:left-1/2"
+				aria-hidden="true"></span>
+			<ol class="relative space-y-8">
+				<TimeLineElement
+					title="Consultor"
+					date="Nov 2025 - actualmente"
+					subtitle="TCM Partners, Bogotá, Colombia"
+					modality="En remoto"
+					side="left"
+				>
+					<p class="mt-3 text-sm text-neutral-600 dark:text-neutral-300">
+						Development of new features for the treasury of Banco ITAU:
+					</p>
+					<ul
+						class="mt-3 space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300 list-disc"
+					>
+						<li>SQL Server</li>
+						<li>C# Backend</li>
+					</ul>
+				</TimeLineElement>
+
+				<TimeLineElement
+					title="Developer FullStack"
+					date="Feb 2023 - Oct 2025"
+					subtitle="Tata Consultancy Services, Bogotá, Colombia"
+					modality="En remoto"
+					side="right"
+				>
+					<p class="mt-3 text-sm text-neutral-600 dark:text-neutral-300">
+						Development of applications for Bancolombia:
+					</p>
+					<ul
+						class="mt-3 space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300 list-disc"
+					>
+						<li>Backend with SpringBoot and Java</li>
+						<li>Frontend with NextJS, Angular</li>
+						<li>Unit tests with Mockito and Jest</li>
+						<li>Acceptance tests with Cucumber</li>
+					</ul>
+				</TimeLineElement>
+
+				<TimeLineElement
+					title="Developer FullStack"
+					date="Mar 2022 - Ene 2023"
+					subtitle="Indra, Bogotá, Colombia"
+					modality="En remoto"
+					side="left"
+				>
+					<ul
+						class="mt-3 space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300 list-disc"
+					>
+						<li>
+							Development of mobile application Lending for Tigo Millicom with
+							Flutter
+						</li>
+						<li>Development of tests using Cucucumber, Serenity</li>
+					</ul>
+				</TimeLineElement>
+
+				<TimeLineElement
+					title="Developer FullStack"
+					date="Oct 2021 - Feb 2022"
+					subtitle="DB System, Bogotá, Colombia"
+					modality="En remoto"
+					side="right"
+				>
+					<ul
+						class="mt-3 space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300 list-disc"
+					>
+						<li>
+							Development of web application in Angular for university of
+							Cundinamarca.
+						</li>
+						<li>Management of Tomcat server for application deployment.</li>
+						<li>Management of Oracle and PostgreSQL databases.</li>
+					</ul>
+				</TimeLineElement>
+
+				<TimeLineElement
+					title="Developer FullStack"
+					date="Jul 2019 - Sep 2021"
+					subtitle="Solredes, Bogotá, Colombia"
+					modality="Híbrido"
+					side="left"
+				>
+					<ul
+						class="mt-3 space-y-2 pl-5 text-sm text-neutral-600 dark:text-neutral-300 list-disc"
+					>
+						<li>
+							Development of mobile applications with Flutter for the
+							municipality of Sopó.
+						</li>
+						<li>
+							Development of mobile application in Flutter for tracking of
+							trucks and ticket management for Transpremier LLC.
+						</li>
+						<li>
+							Development of administrative suite created in Angular and Spring
+							Boot for the municipality of Sopó.
+						</li>
+						<li>Management of Wildfly servers for application deployment.</li>
+						<li>Management of MySQL, Oracle and PostgreSQL databases.</li>
+						<li>
+							Development of web and mobile application for recycling management
+							with React and Flutter.
+						</li>
+					</ul>
+				</TimeLineElement>
+			</ol>
+		</div>
+
+		<div class="mt-12 mb-8">
+			<span class="text-2xl font-bold dark:text-white">Education</span>
+		</div>
+
+		<div class="relative">
+			<span
+				class="absolute top-0 bottom-0 left-3 w-0.5 bg-[linear-gradient(180deg,rgba(16,185,129,0.2),rgba(56,189,248,0.2))] md:left-1/2"
+				aria-hidden="true"></span>
+			<ol class="relative space-y-8">
+				<TimeLineElement
+					title="Engineer in Telematics"
+					date="2022 - 2025"
+					subtitle="Universidad Distrital, Bogotá, Colombia"
+					side="left"
+				/>
+				<TimeLineElement
+					title="Technologist in Data Systematization"
+					date="2015 - 2021"
+					subtitle="Universidad Distrital, Bogotá, Colombia"
+					side="right"
+				/>
+			</ol>
+		</div>
+
+		<div class="mt-12 mb-8">
+			<div class="text-2xl font-bold dark:text-white">Skills and Abilities</div>
+		</div>
+
+		<ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+			{
+				skills.map(({ label, icon: Icon, tone }) => (
+					<li class="flex items-center gap-3 rounded-full border border-slate-900/10 bg-white/60 px-3 py-2 text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-white/10 dark:text-slate-200">
+						<span
+							class={`flex h-8 w-8 items-center justify-center rounded-full ${tone}`}
+						>
+							<Icon class="h-4 w-4" />
+						</span>
+						<span class="text-sm font-semibold">{label}</span>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>

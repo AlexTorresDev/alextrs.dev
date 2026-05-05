@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config'
 
 // Astro integration imports
 import sitemap from '@astrojs/sitemap'
+import preact from '@astrojs/preact'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // Helper imports
@@ -15,7 +16,7 @@ export default defineConfig({
 		locales: ['es', 'en'],
 	},
 	site: seoConfig.baseURL,
-	integrations: [sitemap()],
+	integrations: [sitemap(), preact()],
 	vite: {
 		plugins: [
 			VitePWA({

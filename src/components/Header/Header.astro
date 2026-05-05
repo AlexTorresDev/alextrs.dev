@@ -1,29 +1,146 @@
 ---
-import { getLangFromUrl } from '@/i18n/utils'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-import LanguagePicker from './LanguagePicker.astro'
+import LanguageDropdown from './LanguageDropdown.jsx'
 import Logo from './Logo.astro'
 import ThemeSwitcher from './ThemeSwitcher.astro'
 
 const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const pathname = Astro.url.pathname
+const route = pathname.split('/').filter(Boolean).slice(1).join('/')
+const currentPath = `/${lang}/${route}`
+const navItems = [
+	{ href: `/${lang}/`, label: t('nav.home') },
+	{ href: `/${lang}/cv`, label: t('nav.cv') }
+]
 ---
 
-<header
-	class="sticky bg-white/90 dark:bg-neutral-800/90 w-full z-20 top-0 inset-s-0 backdrop-blur transition-all duration-100 shadow-sm"
->
-	<div
-		class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4"
-	>
-		<a
-			href={`/${lang}`}
-			class="flex items-center space-x-3 rtl:space-x-reverse text-emerald-500"
-		>
-			<Logo />
-		</a>
+<header class="w-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur">
+	<input id="nav-toggle" type="checkbox" class="peer hidden" />
+	<div class="max-w-7xl flex items-center justify-between mx-auto p-4">
+		<div class="flex items-center gap-3">
+			<label
+				for="nav-toggle"
+				class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/90 text-neutral-600 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800/90 dark:text-neutral-200 dark:hover:bg-neutral-700"
+				aria-label="Abrir menu"
+			>
+				<svg
+					viewBox="0 0 24 24"
+					class="h-5 w-5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M4 6h16M4 12h16M4 18h16"></path>
+				</svg>
+			</label>
+			<a
+				href={`/${lang}`}
+				class="flex items-center space-x-3 rtl:space-x-reverse text-emerald-500"
+			>
+				<Logo />
+			</a>
+		</div>
 
-		<div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-			<LanguagePicker />
+		<nav
+			class="hidden md:flex items-center gap-4 text-sm font-semibold text-neutral-700 dark:text-neutral-200"
+		>
+			{
+				navItems.map((item) => (
+					<a
+						href={item.href}
+						class={`rounded-md border px-3 py-1 transition hover:border-emerald-200/70 hover:bg-emerald-50 hover:text-emerald-700 dark:hover:border-emerald-500/30 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-300 ${
+							item.href === currentPath
+								? 'border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-400/50 dark:bg-emerald-500/10 dark:text-emerald-300'
+								: 'border-neutral-200/80 dark:border-neutral-700/70'
+						}`}
+					>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="flex items-center gap-2">
+			<LanguageDropdown currentLang={lang} route={route} client:load />
 			<ThemeSwitcher />
 		</div>
 	</div>
+
+	<label
+		for="nav-toggle"
+		class="md:hidden fixed inset-0 z-40 bg-black/40 opacity-0 pointer-events-none transition peer-checked:opacity-100 peer-checked:pointer-events-auto"
+		aria-hidden="true"></label>
+	<div
+		class="md:hidden fixed top-4 left-4 z-50 w-80 max-w-[calc(100vw-2rem)] rounded-2xl border border-neutral-200/70 bg-white/95 shadow-2xl backdrop-blur transition origin-top-left opacity-0 scale-95 translate-y-2 pointer-events-none peer-checked:opacity-100 peer-checked:scale-100 peer-checked:translate-y-0 peer-checked:pointer-events-auto dark:border-neutral-700/70 dark:bg-neutral-900/95"
+	>
+		<div class="flex items-center justify-between px-5 py-4">
+			<span class="text font-semibold text-white">Menu</span>
+			<label
+				for="nav-toggle"
+				class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow-sm transition hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700"
+				aria-label="Cerrar menu"
+			>
+				<svg
+					viewBox="0 0 24 24"
+					class="h-5 w-5"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M6 6l12 12M18 6l-12 12"></path>
+				</svg>
+			</label>
+		</div>
+		<nav class="px-5 py-2">
+			<ul
+				class="flex flex-col gap-3 text-base font-semibold text-neutral-700 dark:text-neutral-200"
+			>
+				{
+					navItems.map((item) => (
+						<li>
+							<a
+								href={item.href}
+								class={`block rounded-xl border px-3 py-2 transition hover:bg-neutral-100 dark:hover:bg-neutral-800 ${
+									item.href === currentPath
+										? 'border-emerald-300/80 bg-emerald-50 text-emerald-700 dark:border-emerald-400/50 dark:bg-emerald-500/10 dark:text-emerald-300'
+										: 'border-neutral-200/70 bg-neutral-50/80 dark:border-neutral-700/70 dark:bg-neutral-800/60'
+								}`}
+							>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+		<div class="px-5 py-4">
+			<LanguageDropdown currentLang={lang} route={route} client:load />
+		</div>
+	</div>
 </header>
+
+<script>
+	const navToggle = document.getElementById('nav-toggle') as HTMLInputElement | null
+	const setScrollLock = () => {
+		document.body.classList.toggle('nav-open', navToggle?.checked)
+	}
+
+	if (navToggle) {
+		setScrollLock()
+		navToggle.addEventListener('change', setScrollLock)
+	}
+</script>
+
+<style>
+	body.nav-open {
+		overflow: hidden;
+	}
+</style>
