@@ -1,1 +1,18 @@
-<meta http-equiv="refresh" content="0;url=/es/" />
+<html lang="en">
+	<head>
+		<script>
+			// Detecta el idioma preferido del navegador
+			const lang = navigator.language
+			const shortLang = lang.split('-')[0]
+			if (shortLang === 'es') {
+				window.location.replace('/es/')
+			} else {
+				window.location.replace('/en/')
+			}
+		</script>
+		<noscript>
+			<meta http-equiv="refresh" content="0;url=/es/" />
+		</noscript>
+	</head>
+	<body></body>
+</html>
